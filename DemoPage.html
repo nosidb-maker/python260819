@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML · CSS · JavaScript 학습 놀이터</title>
+  <style>
+    :root {
+      --ink: #17212b;
+      --muted: #62707d;
+      --paper: #f6f8f5;
+      --white: #ffffff;
+      --line: #dbe3dc;
+      --mint: #b9e6d2;
+      --mint-deep: #287a5a;
+      --coral: #f47f6b;
+      --sun: #ffd166;
+      --shadow: 0 18px 45px rgba(24, 54, 43, 0.10);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "Trebuchet MS", "Malgun Gothic", sans-serif;
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--ink);
+      color: var(--white);
+      padding: 18px 7vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .logo { font-weight: 800; letter-spacing: 0.04em; }
+    nav { display: flex; gap: 18px; }
+    nav a { color: #dcebe4; text-decoration: none; font-size: 0.9rem; }
+    nav a:hover { color: var(--sun); }
+
+    .hero {
+      min-height: 400px;
+      padding: 78px 7vw 90px;
+      background:
+        radial-gradient(circle at 88% 22%, rgba(255, 209, 102, 0.9) 0 90px, transparent 91px),
+        linear-gradient(120deg, var(--mint) 0%, #dff2e8 52%, #fff6dc 100%);
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(250px, 0.8fr);
+      align-items: center;
+      gap: 50px;
+    }
+    .eyebrow { color: var(--mint-deep); font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; }
+    h1 { font-size: clamp(2.2rem, 6vw, 4.8rem); line-height: 1.05; margin: 12px 0 22px; max-width: 720px; }
+    .hero p { max-width: 590px; color: #385247; font-size: 1.08rem; }
+    .hero-visual {
+      background: var(--ink);
+      color: var(--white);
+      padding: 26px;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      transform: rotate(2deg);
+      animation: float-in 0.8s ease-out both;
+    }
+    .code-line { color: #9ce0bf; font-family: Consolas, monospace; margin: 8px 0; }
+    .code-line span { color: var(--sun); }
+
+    main { max-width: 1180px; margin: 0 auto; padding: 72px 7vw; }
+    .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 24px; }
+    h2 { font-size: clamp(1.7rem, 3vw, 2.5rem); line-height: 1.15; margin: 0; }
+    .section-heading p { color: var(--muted); margin: 0; }
+    .lessons { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .lesson {
+      background: var(--white);
+      border: 1px solid var(--line);
+      padding: 24px;
+      border-radius: 8px;
+      box-shadow: 0 7px 22px rgba(24, 54, 43, 0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .lesson:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+    .lesson .number { color: var(--coral); font-size: 1.4rem; font-weight: 800; }
+    .lesson h3 { margin: 10px 0 8px; }
+    .lesson p { color: var(--muted); margin: 0 0 18px; }
+    .tag { display: inline-block; background: #edf6f0; color: var(--mint-deep); padding: 3px 9px; font-size: 0.78rem; font-weight: 700; }
+    .memory-line { background: #fff6dc; border-left: 4px solid var(--sun); padding: 10px 12px; margin: 18px 0; font-size: 0.92rem; }
+    .example { margin: 0; padding: 12px; background: #f0f4f1; color: var(--mint-deep); font-family: Consolas, monospace; font-size: 0.82rem; overflow-wrap: anywhere; }
+    .recipe { margin-top: 28px; padding: 22px 26px; background: #e7efe9; border: 1px solid var(--line); border-radius: 8px; }
+    .recipe h3 { margin: 0 0 6px; }
+    .recipe p { margin: 0; color: var(--muted); }
+    .recipe strong { color: var(--mint-deep); }
+
+    .playground {
+      background: var(--ink);
+      color: var(--white);
+      padding: 30px;
+      border-radius: 8px;
+      margin-top: 72px;
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 30px;
+    }
+    .playground p { color: #c9d8d0; }
+    .tabs { display: flex; gap: 8px; margin: 22px 0; }
+    .tab, button { border: 0; border-radius: 4px; padding: 10px 14px; font: inherit; cursor: pointer; }
+    .tab { background: #2c3b47; color: #d6e4dd; }
+    .tab.active, button { background: var(--coral); color: var(--white); font-weight: 800; }
+    .demo-panel { background: #f4f8f2; color: var(--ink); padding: 24px; border-radius: 6px; min-height: 230px; }
+    .demo-panel code { display: block; background: #e7efe9; padding: 12px; color: var(--mint-deep); font-family: Consolas, monospace; overflow-wrap: anywhere; }
+    label { display: block; font-weight: 800; margin: 16px 0 6px; }
+    input { width: 100%; border: 1px solid var(--line); padding: 11px; font: inherit; }
+    #message { min-height: 28px; color: var(--mint-deep); font-weight: 800; }
+
+    footer { border-top: 1px solid var(--line); padding: 28px 7vw; color: var(--muted); text-align: center; }
+    @keyframes float-in { from { opacity: 0; transform: translateY(20px) rotate(2deg); } to { opacity: 1; transform: translateY(0) rotate(2deg); } }
+    @media (max-width: 760px) {
+      header { align-items: flex-start; flex-direction: column; }
+      .hero, .playground { grid-template-columns: 1fr; }
+      .hero { padding-top: 55px; }
+      .lessons { grid-template-columns: 1fr; }
+      .section-heading { display: block; }
+      .section-heading p { margin-top: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">WEB LAB / 01</div>
+    <nav aria-label="주요 메뉴">
+      <a href="#lessons">학습 주제</a>
+      <a href="#playground">실습하기</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <div class="eyebrow">HTML5 · CSS3 · JavaScript</div>
+      <h1>웹의 기본기를<br>직접 만져보세요.</h1>
+      <p>구조를 만들고, 스타일을 입히고, 동작을 연결하는 세 가지 언어를 하나의 작은 페이지에서 경험해 봅니다.</p>
+    </div>
+    <div class="hero-visual" aria-label="코드 예시">
+      <div class="code-line"><span>&lt;section&gt;</span></div>
+      <div class="code-line">  &lt;h1&gt;Hello, web!&lt;/h1&gt;</div>
+      <div class="code-line">  &lt;button <span>id="start"</span>&gt;</div>
+      <div class="code-line">    시작하기</div>
+      <div class="code-line"><span>&lt;/section&gt;</span></div>
+    </div>
+  </section>
+
+  <main>
+    <section id="lessons">
+      <div class="section-heading">
+        <h2>세 가지 레이어</h2>
+        <p>웹페이지는 이 세 층이 함께 작동합니다.</p>
+      </div>
+      <div class="lessons">
+        <article class="lesson">
+          <div class="number">01</div>
+          <h3>HTML5 · 구조</h3>
+          <p>HTML은 웹페이지에 제목, 글, 이미지 같은 <strong>내용을 배치하는 언어</strong>입니다.</p>
+          <div class="memory-line"><strong>기억법:</strong> 집의 벽과 방을 만드는 설계도</div>
+          <pre class="example">&lt;h1&gt;오늘의 제목&lt;/h1&gt;
+&lt;p&gt;반가워요!&lt;/p&gt;</pre>
+          <span class="tag">콘텐츠의 뼈대</span>
+        </article>
+        <article class="lesson">
+          <div class="number">02</div>
+          <h3>CSS3 · 표현</h3>
+          <p>CSS는 HTML로 만든 내용에 <strong>색, 크기, 위치, 간격</strong>을 입히는 언어입니다.</p>
+          <div class="memory-line"><strong>기억법:</strong> 집의 페인트와 가구를 고르는 인테리어</div>
+          <pre class="example">h1 {
+  color: #287a5a;
+}</pre>
+          <span class="tag">화면의 분위기</span>
+        </article>
+        <article class="lesson">
+          <div class="number">03</div>
+          <h3>JavaScript · 동작</h3>
+          <p>JavaScript는 클릭, 입력 같은 <strong>사건에 반응해 화면을 움직이는 언어</strong>입니다.</p>
+          <div class="memory-line"><strong>기억법:</strong> 집의 스위치와 자동문을 움직이는 전기 장치</div>
+          <pre class="example">button.addEventListener('click', () =&gt; {
+  alert('환영합니다!');
+});</pre>
+          <span class="tag">상호작용의 시작</span>
+        </article>
+      </div>
+      <div class="recipe">
+        <h3>한 문장으로 정리하기</h3>
+        <p><strong>HTML</strong>로 내용을 만들고 → <strong>CSS</strong>로 보기 좋게 꾸미고 → <strong>JavaScript</strong>로 사용자의 행동에 반응하게 만듭니다.</p>
+      </div>
+    </section>
+
+    <section class="playground" id="playground">
+      <div>
+        <div class="eyebrow" style="color: var(--sun);">Mini playground</div>
+        <h2>코드를 바꾸면<br>화면도 바뀝니다.</h2>
+        <p>탭을 눌러 각 기술의 핵심 역할을 확인하고, 이름을 입력해 JavaScript 이벤트를 실행해 보세요.</p>
+        <div class="tabs" role="tablist" aria-label="기술 선택">
+          <button class="tab active" data-topic="HTML" role="tab">HTML</button>
+          <button class="tab" data-topic="CSS" role="tab">CSS</button>
+          <button class="tab" data-topic="JS" role="tab">JS</button>
+        </div>
+      </div>
+      <div class="demo-panel">
+        <div id="topic-title"><strong>HTML</strong>은 구조를 담당합니다.</div>
+        <code id="topic-code">&lt;h1&gt;나의 첫 웹페이지&lt;/h1&gt;</code>
+        <label for="name-input">이름을 입력하세요</label>
+        <input id="name-input" type="text" placeholder="예: 민수">
+        <p id="message" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>오늘의 작은 실습이 내일의 웹페이지가 됩니다.</footer>
+
+  <script>
+    const topics = {
+      HTML: ['HTML', '구조를 담당합니다.', '&lt;h1&gt;나의 첫 웹페이지&lt;/h1&gt;'],
+      CSS: ['CSS', '표현을 담당합니다.', 'color: #287a5a; display: grid;'],
+      JS: ['JavaScript', '동작을 담당합니다.', "button.addEventListener('click', start)"]
+    };
+
+    document.querySelectorAll('.tab').forEach((tab) => {
+      tab.addEventListener('click', () => {
+        document.querySelector('.tab.active').classList.remove('active');
+        tab.classList.add('active');
+        const [name, description, code] = topics[tab.dataset.topic];
+        document.querySelector('#topic-title').innerHTML = `<strong>${name}</strong>은 ${description}`;
+        document.querySelector('#topic-code').innerHTML = code;
+      });
+    });
+
+    document.querySelector('#name-input').addEventListener('input', (event) => {
+      const name = event.target.value.trim();
+      document.querySelector('#message').textContent = name ? `${name}님, 웹 실습을 시작해 볼까요?` : '';
+    });
+  </script>
+</body>
+</html>
