@@ -39,3 +39,8 @@ for i in range(len(srclst)) :
     urlretrieve(srclst[i], f'./{input_name}/{input_name}_{i+1}.jpg')
 driver.close() # 브라우저 닫기
 print(f'{input_name} 이미지 수집, 저장 작업 완료')
+
+
+
+# <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEyMDdfMjI2%2FMDAxNzY1MTE4MjI1NDA2.-wnvGaYPOL_HATDs0YYaik7fW7Wbv0NsY4LF6JFGO2Yg.VlGLIf_VtoxLJalhtNqSG28xlRbo8OKJ_CG-v-1z8BYg.JPEG%2FUntitled-3.jpg&amp;type=a340" class="_fe_image_tab_content_thumbnail_image" alt="강아지가 보는 세상은 조금 다르다? 강아지 시력" data-image-viewer-trigger="" data-image-viewer-img-id="image_sas:blog_63dea112f0d9db670d5ce76b2344fc03" data-thumb-width="340" data-thumb-height="510" data-is-min-width="true" data-is-max-width="false" width="144" height="216" style="position: relative; left: 50%; top: 0%; transform: translate(-50%, 0%); width: 122.66666666666666px; height: auto;" onerror="naver.common.handleImgError(this)">
+

@@ -10,6 +10,7 @@ driver.get("https://www.google.co.kr")
 #창이 오픈되고 3초를 대기한다. 
 time.sleep(3)
 
+#구글검색창에 입력하는 부분에 대한 코드
 #<textarea class="gLFyf" jsaction="paste:puy29d;" id="APjFqb" maxlength="2048" name="q" rows="1" aria-activedescendant="" aria-autocomplete="both" aria-controls="Alh6id" aria-expanded="false" aria-haspopup="both" aria-owns="Alh6id" autocapitalize="off" autocomplete="off" autocorrect="off" autofocus="" role="combobox" spellcheck="false" title="검색" type="search" value="" aria-label="검색" data-ved="0ahUKEwiN1oGW9oGEAxU0nq8BHYCKAqkQ39UDCA4"></textarea>
 #검색어창 찾기
 searchBox = driver.find_element(By.CLASS_NAME, "gLFyf")
@@ -19,4 +20,9 @@ searchBox = driver.find_element(By.CLASS_NAME, "gLFyf")
 
 searchBox.send_keys("맥북")
 searchBox.send_keys(Keys.RETURN)
-time.sleep(5)
+#time.sleep(5)
+
+#무한 루프
+while True:
+    pass
+
