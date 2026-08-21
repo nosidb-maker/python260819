@@ -8,6 +8,7 @@ strC = """이 문자열은
 strD="이 문자열도\n다중 라인\n저장"
 
 print(strA)
+print(len(strA))
 print(len(strB))
 print(strC)
 print(strD)
