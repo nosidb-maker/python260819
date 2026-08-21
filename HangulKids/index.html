@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>신나는 한글 탐험대 🌟 - 6세 맞춤형 한글 놀이 학습</title>
+  <meta name="description" content="6세 아동을 위한 재미있는 인터랙티브 한글 놀이터! 자모음 결합 기차, 풍선 팡팡 단어 퀴즈, 별자리 따라쓰기, 신나는 모험 동화책을 즐겨보세요.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Decorative background clouds -->
+  <div class="bg-decorations">
+    <div class="floating-cloud" style="top: 10%; left: 5%;">☁️</div>
+    <div class="floating-cloud" style="top: 25%; left: 80%; animation-delay: 5s;">⭐</div>
+    <div class="floating-cloud" style="top: 70%; left: 15%; animation-delay: 10s;">🎈</div>
+    <div class="floating-cloud" style="top: 85%; left: 75%; animation-delay: 15s;">🌈</div>
+  </div>
+
+  <main class="app-container">
+    <!-- Top Navigation Bar -->
+    <header class="top-nav">
+      <div class="brand-section">
+        <span class="brand-icon" id="brandIcon">🦖</span>
+        <div>
+          <h1 class="brand-title">신나는 한글 탐험대</h1>
+          <div class="brand-subtitle">재미있게 놀면서 배우는 우리 한글</div>
+        </div>
+      </div>
+
+      <div class="nav-controls">
+        <!-- Theme Selector -->
+        <div class="theme-selector" id="themeSelector" title="좋아하는 테마를 골라봐요!">
+          <button class="theme-btn active" data-theme="dino">🦖 공룡</button>
+          <button class="theme-btn" data-theme="vehicle">🚗 탈것</button>
+          <button class="theme-btn" data-theme="animal">🦁 동물</button>
+          <button class="theme-btn" data-theme="space">🚀 우주</button>
+        </div>
+
+        <!-- Star Badge Counter -->
+        <div class="stat-badge" id="starBadge">
+          <span class="star-icon">⭐</span>
+          <span id="starCount">0</span>개
+        </div>
+
+        <!-- Sound Toggle Button -->
+        <button class="icon-btn" id="soundToggleBtn" title="소리 켜기/끄기">🔊</button>
+
+        <!-- Child Safety Timer Button -->
+        <button class="icon-btn" id="timerBtn" title="놀이 안심 타이머">⏱️</button>
+      </div>
+    </header>
+
+    <!-- Mode Selector Tabs -->
+    <nav class="mode-tabs">
+      <button class="tab-btn active" data-mode="train" id="tabTrain">
+        <span class="tab-icon">🚂</span>
+        <span class="tab-name">1. 소리 기차</span>
+      </button>
+      <button class="tab-btn" data-mode="quiz" id="tabQuiz">
+        <span class="tab-icon">🎈</span>
+        <span class="tab-name">2. 풍선 팡팡</span>
+      </button>
+      <button class="tab-btn" data-mode="tracing" id="tabTracing">
+        <span class="tab-icon">⭐</span>
+        <span class="tab-name">3. 별자리 쓰기</span>
+      </button>
+      <button class="tab-btn" data-mode="storybook" id="tabStorybook">
+        <span class="tab-icon">📖</span>
+        <span class="tab-name">4. 모험 동화책</span>
+      </button>
+    </nav>
+
+    <!-- Main Dynamic Content Area -->
+    <section class="content-area">
+      <!-- Character Greeting & Prompt -->
+      <div class="character-bar" id="characterBar">
+        <div class="character-avatar" id="charAvatar">🦕</div>
+        <div class="character-bubble" id="charBubble">
+          크앙! 나와 함께 신나는 한글 공룡 섬으로 떠나볼까?
+        </div>
+      </div>
+
+      <!-- =========================================
+           MODE 1: 자모음 합체 기차
+           ========================================= -->
+      <div class="mode-view active" id="viewTrain">
+        <div class="train-stage">
+          <div class="train-assembly">
+            <!-- Consonant Slot -->
+            <div class="slot-card" id="slotConsonant">
+              <span class="slot-label">자음 카트</span>
+              <span class="slot-value" id="slotConsonantVal">ㄱ</span>
+            </div>
+
+            <span class="plus-math-icon">➕</span>
+
+            <!-- Vowel Slot -->
+            <div class="slot-card" id="slotVowel">
+              <span class="slot-label">모음 승객</span>
+              <span class="slot-value" id="slotVowelVal">ㅏ</span>
+            </div>
+
+            <span class="equal-math-icon">➡️</span>
+
+            <!-- Result Combined Cart -->
+            <div class="result-card" id="resultCombined" title="클릭하면 다시 소리를 들려줘요!">
+              <span class="result-char" id="resultCombinedVal">가</span>
+              <span class="result-sound-btn">🔊 소리 듣기</span>
+            </div>
+          </div>
+          <div class="track-line"></div>
+        </div>
+
+        <!-- Consonant Grid -->
+        <div class="selection-section">
+          <h2 class="section-title">🚂 1단계: 자음 카트를 골라보세요!</h2>
+          <div class="char-grid" id="consonantGrid"></div>
+        </div>
+
+        <!-- Vowel Grid -->
+        <div class="selection-section">
+          <h2 class="section-title">🎈 2단계: 모음 승객을 태워보세요!</h2>
+          <div class="char-grid" id="vowelGrid"></div>
+        </div>
+      </div>
+
+      <!-- =========================================
+           MODE 2: 풍선 팡팡 단어 퀴즈
+           ========================================= -->
+      <div class="mode-view" id="viewQuiz">
+        <div class="quiz-header">
+          <h2 class="section-title" id="quizTitle">🎈 알맞은 글자 풍선을 터뜨려 단어를 완성해요!</h2>
+          <button class="action-btn" id="nextQuizBtn">다음 퀴즈 ➡️</button>
+        </div>
+
+        <div class="quiz-card">
+          <div class="quiz-emoji" id="quizEmoji" title="소리 듣기">🦁</div>
+          <div class="quiz-hint" id="quizHint">용감한 동물의 왕!</div>
+          <button class="action-btn primary" id="quizHearBtn">🔊 단어 소리 듣기</button>
+          
+          <div class="word-slots" id="wordSlotsContainer">
+            <!-- Dynamic word syllable slots -->
+          </div>
+        </div>
+
+        <!-- Balloon Flying Arena -->
+        <div class="balloon-arena" id="balloonArena">
+          <!-- Floating candidate balloons generated by JS -->
+        </div>
+      </div>
+
+      <!-- =========================================
+           MODE 3: 별자리 따라쓰기
+           ========================================= -->
+      <div class="mode-view" id="viewTracing">
+        <div class="quiz-header">
+          <h2 class="section-title">⭐ 반짝반짝 별을 따라 글자를 써보세요!</h2>
+          <button class="action-btn accent" id="tracingSuccessBtn">✨ 완성 도장 쾅!</button>
+        </div>
+
+        <div class="tracing-layout">
+          <!-- Left letter picker -->
+          <div class="letter-picker-list" id="tracingPickerList">
+            <!-- Dynamic letters -->
+          </div>
+
+          <!-- Canvas Drawing Board -->
+          <div class="canvas-container">
+            <div class="canvas-wrapper" id="canvasWrapper">
+              <canvas id="tracingCanvas" width="320" height="320"></canvas>
+              <div class="guide-letter-layer" id="guideLetter">ㄱ</div>
+            </div>
+
+            <div class="canvas-controls">
+              <button class="action-btn" id="clearCanvasBtn">🗑️ 다시 쓰기</button>
+              <button class="action-btn primary" id="speakTraceCharBtn">🔊 글자 소리 듣기</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========================================
+           MODE 4: 모험 동화책 (스토리 & 스티커)
+           ========================================= -->
+      <div class="mode-view" id="viewStorybook">
+        <div class="storybook-container">
+          <div class="book-card">
+            <div class="book-page-header">
+              <span class="page-tag" id="storyPageTag">제 1장</span>
+              <div style="display: flex; gap: 8px;">
+                <button class="action-btn" id="prevStoryBtn">◀ 이전 장</button>
+                <button class="action-btn primary" id="nextStoryBtn">다음 장 ▶</button>
+              </div>
+            </div>
+
+            <div class="book-illustration-box">
+              <div class="story-scene-emojis" id="storyIllustration">🗺️ 🌟 👦</div>
+              <p class="story-text" id="storyText">
+                어느 맑은 날, 호기심 많은 꼬마 탐험가에게 반짝이는 비밀 지도가 날아왔어요.
+              </p>
+            </div>
+
+            <div style="display: flex; justify-content: center; gap: 12px;">
+              <button class="action-btn primary" id="readStoryBtn">📖 이야기 실감나게 읽어주기</button>
+            </div>
+          </div>
+
+          <!-- My Sticker Collection -->
+          <div class="sticker-collection">
+            <h3 class="section-title">🏆 내가 모은 탐험 칭찬 스티커</h3>
+            <div class="sticker-grid" id="stickerGrid">
+              <!-- Stickers listed dynamically -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Celebration Modal -->
+  <div class="modal-overlay" id="rewardModal">
+    <div class="modal-card">
+      <div class="modal-emoji" id="modalEmoji">🎉</div>
+      <h2 class="modal-title" id="modalTitle">참 잘했어요!</h2>
+      <p class="modal-desc" id="modalDesc">별 1개를 획득하고 새로운 한글 조각을 찾았어요!</p>
+      <button class="action-btn primary" id="closeRewardModalBtn" style="font-size: 1.3rem; padding: 12px 30px;">
+        신나게 계속하기 🚀
+      </button>
+    </div>
+  </div>
+
+  <!-- Parent Timer Reminder Modal -->
+  <div class="modal-overlay" id="timerModal">
+    <div class="modal-card">
+      <div class="modal-emoji">🛌 🌙</div>
+      <h2 class="modal-title">오늘 탐험 완료!</h2>
+      <p class="modal-desc">
+        오늘 한글 탐험을 아주 훌륭하게 마쳤어요!<br>
+        소중한 눈을 위해 잠깐 쉬고 내일 또 만나요~
+      </p>
+      <button class="action-btn primary" id="closeTimerModalBtn">
+        충분히 쉬고 더 할래요 🌟
+      </button>
+    </div>
+  </div>
+
+  <!-- Confetti Canvas -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
